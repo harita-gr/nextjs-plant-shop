@@ -1,17 +1,18 @@
+//Option 2 : Fetch products on client side (in useEffect)
+// directly from an external API
 import Head from "next/head";
+import {useEffect,useState} from 'react';
 import Title from "../components/Title";
 import { getProducts } from "../lib/products";
 
-export async function getStaticProps() {
-  console.log("[HomePage] getStaticProps");
-  const products = await getProducts();
-  return { 
-    props: { products },
-    revalidate: 60 //60 sec
- };
-}
+function HomePage() {
 
-function HomePage({ products }) {
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    //getProducts is async. So handling promise
+     getProducts().then(setProducts);
+  }, []);
+  
   return (
     <div>
       <Head>
@@ -27,6 +28,7 @@ function HomePage({ products }) {
       </main>
     </div>
   );
-}
-
+          
+          }
+        
 export default HomePage;

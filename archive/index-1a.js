@@ -1,3 +1,6 @@
+//Option 1a : Fetch products on server side (in getStaticProps)
+// But with ISR
+
 import Head from "next/head";
 import Title from "../components/Title";
 import { getProducts } from "../lib/products";
